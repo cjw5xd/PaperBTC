@@ -12,7 +12,6 @@ Create a virtual environment and install the dependencies:
   source venv/bin/activate
   pip install -r requirements.txt
 
-
 Execute the script:
 
   python paperbtc.py
