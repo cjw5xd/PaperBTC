@@ -1,5 +1,3 @@
-import binascii
-import codecs
 import hashlib
 
 import base58
