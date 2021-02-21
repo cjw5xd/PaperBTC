@@ -1,7 +1,7 @@
 import hashlib
 
-import base58
-import ecdsa
+from base58 import b58encode
+from ecdsa import SECP256k1, SigningKey
 
 
 # Using the 0x00 prefix specifies the P2PKH locking script.
@@ -18,7 +18,7 @@ def ripemd160(data):
 
 if __name__ == '__main__':
     # Generate an ECDSA key pair.
-    private_key = ecdsa.SigningKey.generate(curve=ecdsa.SECP256k1)
+    private_key = SigningKey.generate(curve=SECP256k1)
     public_key = private_key.get_verifying_key()
 
     # Calculate the public key hash, also known as the HASH160.
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     checksum = sha256(sha256(PREFIX + public_key_hash))[:4]
 
     # Determine the address in base58 format.
-    address = base58.b58encode(PREFIX + public_key_hash + checksum).decode()
+    address = b58encode(PREFIX + public_key_hash + checksum).decode()
 
     print('Address:', address)
     print('Public Key:', public_key._compressed_encode().hex())
